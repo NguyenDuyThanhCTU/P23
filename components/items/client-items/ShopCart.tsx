@@ -64,7 +64,7 @@ const ShopCart = () => {
           transition duration-300 flex `}
     >
       <div
-        className="w-[43px] h-[43px] flex items-center justify-center bg-mainpink cursor-pointer text-white hover:bg-mainpink duration-300 group"
+        className="w-[43px] h-[43px] flex items-center justify-center bg-mainGreen cursor-pointer text-white hover:bg-green-700 duration-300 group"
         onClick={() => setOpenCart(!OpenCart)}
       >
         {OpenCart ? (
@@ -118,7 +118,7 @@ const ShopCart = () => {
                         <>
                           <p className="w-full text-right">
                             Giá:{" "}
-                            <span className="text-mainpink">
+                            <span className="text-mainGreen">
                               {" "}
                               {product.price} <sup>VNĐ</sup>
                             </span>
@@ -132,12 +132,12 @@ const ShopCart = () => {
                                 {" "}
                                 {product.price} VNĐ
                               </p>
-                              <span className="text-mainpink">
+                              <span className="text-mainGreen">
                                 -{product.sale.discount}%
                               </span>
                             </div>
 
-                            <p className="font-bold text-mainpink">
+                            <p className="font-bold text-mainGreen">
                               {product.sale.newPrice} VNĐ
                             </p>
                           </div>
@@ -158,12 +158,12 @@ const ShopCart = () => {
               <div className="font-SVNDancing text-[28px]">Tổng: </div>
               <div className="flex flex-col gap-2">
                 <div>
-                  <span className="text-mainpink">
+                  <span className="text-mainGreen">
                     {totalAmount} <sup>VNĐ</sup>
                   </span>
                 </div>
                 <Link href={"/thanh-toan"}>
-                  <div className="px-4 bg-mainpink hover:bg-red-600 duration-300 py-1 text-white cursor-pointer">
+                  <div className="px-4 bg-mainGreen hover:bg-red-600 duration-300 py-1 text-white cursor-pointer">
                     Đặt hàng
                   </div>
                 </Link>

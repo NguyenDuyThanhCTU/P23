@@ -6,8 +6,8 @@ import Link from "next/link";
 import React from "react";
 
 export const metadata: Metadata = {
-  title: "CÔNG TY TNHH THƯƠNG MẠI SẢN XUẤT VIỆT Á",
-  description: "CÔNG TY TNHH THƯƠNG MẠI SẢN XUẤT VIỆT Á ",
+  title: "Tin tức | Ken EBIKE Cần Thơ",
+  description: "Ken EBIKE - cửa hàng xe điện uy tín tại Cần Thơ",
 };
 
 const NewsPage = async () => {

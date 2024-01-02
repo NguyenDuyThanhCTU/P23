@@ -9,7 +9,7 @@ import Link from "next/link";
 const HomeSlide = () => {
   const { Slides } = useData();
   return (
-    <div className=" flex flex-col">
+    <div className=" flex flex-col w-full">
       <div>
         <Swiper
           spaceBetween={30}
@@ -35,7 +35,7 @@ const HomeSlide = () => {
                   <img
                     src={item.image}
                     alt="slide"
-                    className="w-full    hover:scale-105 duration-300 object-contain p:h-auto d:h-[600px]"
+                    className="w-full    hover:scale-105 duration-300 object-contain  p:h-auto d:h-[600px]"
                   />
                 </Link>
               </SwiperSlide>

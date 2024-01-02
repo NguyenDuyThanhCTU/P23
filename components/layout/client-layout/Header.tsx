@@ -17,7 +17,7 @@ import { RxCross2 } from "react-icons/rx";
 const Header = () => {
   const [search, setSearch] = useState("");
   const [searchRs, setSearchRs] = useState([]);
-  const { Products, currentUser, setCurrentUser } = useData();
+  const { Products, currentUser, setCurrentUser, productTypes } = useData();
   const [openSearchMB, setOpenSearchMB] = useState(false);
   const [open, setOpen] = useState(false);
   const { setIsLoading } = useStateProvider();
@@ -72,7 +72,7 @@ const Header = () => {
   }, [Products, search]);
 
   return (
-    <div className="z-50">
+    <div className="z-50 fixed top-0 w-full bg-white">
       <div className="mx-14 d:block p:hidden">
         <div className="flex justify-between items-center  py-5">
           <div className="h-[80px] w-[150px] relative">
@@ -229,6 +229,58 @@ const Header = () => {
                             </p>
                           </Link>
                         ))}
+
+                        {}
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {item.label === "Xe Đạp Trợ Lực Điện" && (
+                  <div className="flex flex-col top-8 absolute z-50 w-full">
+                    <div className="bg-none w-full h-4"></div>
+                    <div className=" top-9 hidden group-hover/main:block duration-300">
+                      <div className=" flex flex-col bg-white shadow-md border-t-2 w-full border-gray-500 ">
+                        {productTypes
+                          .filter(
+                            (item: any) => item.parent === "Xe đạp trợ lực điện"
+                          )
+                          .map((items: any, idx: number) => (
+                            <Link
+                              key={idx}
+                              href={`/xe-dap-tro-luc-dien?type=${items.typeUrl}`}
+                              className="full"
+                            >
+                              <p className="py-2 px-4 hover:bg-green-100 duration-300 text-black truncate text-[15px] font-light">
+                                {" "}
+                                {items.type}
+                              </p>
+                            </Link>
+                          ))}
+
+                        {}
+                      </div>
+                    </div>
+                  </div>
+                )}
+                {item.label === "Xe Đạp Điện" && (
+                  <div className="flex flex-col top-8 absolute z-50 w-full">
+                    <div className="bg-none w-full h-4"></div>
+                    <div className=" top-9 hidden group-hover/main:block duration-300">
+                      <div className=" flex flex-col bg-white shadow-md border-t-2 w-full border-gray-500 ">
+                        {productTypes
+                          .filter((item: any) => item.parent === "Xe đạp điện")
+                          .map((items: any, idx: number) => (
+                            <Link
+                              key={idx}
+                              href={`/xe-dap-tro-luc-dien?type=${items.typeUrl}`}
+                              className="full"
+                            >
+                              <p className="py-2 px-4 hover:bg-green-100 duration-300 text-black truncate text-[15px] font-light">
+                                {" "}
+                                {items.type}
+                              </p>
+                            </Link>
+                          ))}
 
                         {}
                       </div>

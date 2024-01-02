@@ -3,8 +3,8 @@ import { Metadata } from "next";
 import React from "react";
 
 export const metadata: Metadata = {
-  title: "Liên Hệ | Quảng Cáo, Cơ Khí Xây Dựng",
-  description: "Hoàng Tuấn - Uy tín tạo niềm tin, Kiến tạo để vươn xa",
+  title: "Liên hệ | Ken EBIKE Cần Thơ",
+  description: "Ken EBIKE - cửa hàng xe điện uy tín tại Cần Thơ",
 };
 
 const ContactPage = () => {

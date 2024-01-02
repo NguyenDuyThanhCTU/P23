@@ -20,11 +20,11 @@ const HomePage = async () => {
   return (
     <div>
       <HomeSlide />
-      <div className="w-[1100px] mx-auto">
+      <div className="d:w-[1100px] d:mx-auto p:w-auto p:mx-2">
         <ShortIntro />
       </div>
       <div className="bg-green-200 mt-2">
-        <div className="mx-10 py-5  ">
+        <div className="p:mx-2 d:mx-10 py-5  ">
           <div className="bg-green-600 text-white text-center text-[30px] font-normal py-2">
             ✨ SẢN PHẨM BÁN CHẠY NHẤT 🔥
           </div>

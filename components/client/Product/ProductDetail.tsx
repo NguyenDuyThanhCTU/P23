@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 
-import { Image, Skeleton, Tabs } from "antd";
+import { Image, Modal, Skeleton, Tabs } from "antd";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -30,7 +30,9 @@ const ProductDetail = () => {
   const { setCartItems, Sale } = useData();
   const { setOpenCart, OpenCart } = useStateProvider();
   const router = useRouter();
-  const { Products } = useData();
+  const { Products, setBill, currentUser } = useData();
+  const [isCheckPaymentOpen, setIsCheckPaymentOpen] = useState(false);
+
   const params = useParams();
 
   useEffect(() => {
@@ -59,7 +61,21 @@ const ProductDetail = () => {
 
   const HandleOrder = (id: string, type: string) => {
     if (type === "buy") {
+      if (currentUser) {
+        const OrderData = {
+          id: currentUser.id,
+          name: currentUser.displayName,
+          address: currentUser.address,
+          email: currentUser.email,
+          phone: currentUser.phone,
+        };
+        setBill(OrderData);
+        router.push(`/thanh-toan`);
+      } else {
+        setIsCheckPaymentOpen(true);
+      }
       setCartItems((prevItems: any) => [...prevItems, id]);
+
       router.push("/thanh-toan");
     } else {
       setCartItems((prevItems: any) => [
@@ -357,6 +373,33 @@ const ProductDetail = () => {
           </div>
         </div>
       </div>
+      <>
+        <Modal
+          closable={false}
+          open={isCheckPaymentOpen}
+          onCancel={() => setIsCheckPaymentOpen(false)}
+          footer={null}
+        >
+          <div>
+            <h2 className="text-[24px] font-semibold">Đến trang đăng nhập</h2>
+            <p>Đăng nhập để giao dịch</p>
+            <div className="flex w-full justify-center gap-5 mt-5">
+              <div
+                className="py-2 px-6 rounded-full border border-mainyellow cursor-pointer text-mainyellow duration-300 hover:border-orange-500 hover:text-orange-500"
+                onClick={() => setIsCheckPaymentOpen(false)}
+              >
+                Hủy
+              </div>
+              <Link
+                href={"/dang-nhap"}
+                className="py-2 px-6 rounded-full border border-mainyellow bg-mainyellow text-white duration-300 hover:bg-orange-500 hover:border-orange-500 cursor-pointer"
+              >
+                Đăng nhập
+              </Link>
+            </div>
+          </div>
+        </Modal>
+      </>
       <div
         className={`fixed bottom-36 right-[-300px] ${
           OpenCart ? " z-50" : "z-0"

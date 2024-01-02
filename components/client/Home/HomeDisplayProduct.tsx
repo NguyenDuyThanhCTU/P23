@@ -11,10 +11,10 @@ const HomeDisplayProduct = ({ Data }: any) => {
         </h2>
         <p className="text-redPrimmary font-normal"> {Data.price}</p>
       </div>
-      <div className="grid grid-cols-4">
+      <div className="grid p:grid-cols-2 d:grid-cols-4">
         <Image src={Data.image} alt="Product" width={400} height={300} />
       </div>
-      <div className="grid grid-cols-4 gap-2 mt-5">
+      <div className="grid  p:grid-cols-2 d:grid-cols-4 gap-2 mt-5">
         {Data.subimage.map((item: any, index: number) => (
           <div key={index}>
             <Image
@@ -22,7 +22,7 @@ const HomeDisplayProduct = ({ Data }: any) => {
               alt="product"
               width={400}
               height={300}
-              className="h-[300px] object-cover"
+              className="p:h-[200px] d:h-[300px] object-cover"
             />
           </div>
         ))}

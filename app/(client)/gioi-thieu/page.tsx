@@ -1,13 +1,11 @@
 import Introduction from "@components/client/Introduction/Introduction";
-import { getDataByTypeProps } from "@lib/get-data";
 import { Metadata } from "next";
 import React from "react";
 
 export const metadata: Metadata = {
-  title: "Giới Thiệu | Sửa Nhà Cần Thơ",
-  description: "Sửa Nhà Cần Thơ - An Lành Cho Gia Đình Việt",
+  title: "Giới Thiệu | Ken EBIKE Cần Thơ",
+  description: "Ken EBIKE - cửa hàng xe điện uy tín tại Cần Thơ",
 };
-
 const IntroductionPage = async () => {
   return (
     <div>

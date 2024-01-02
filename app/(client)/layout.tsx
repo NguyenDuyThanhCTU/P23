@@ -13,7 +13,7 @@ const ClientLayout = ({ children }: ClientLayoutProps) => {
   return (
     <div className="font-LexendDeca font-extralight d:text-[16px] p:text-[14px]">
       <Header />
-      {children}
+      <div className="d:mt-[166px] p:mt-[120px]">{children}</div>
       <Footer />
       {/* <OnTop />
       <Hotline /> */}
