@@ -1,22 +1,26 @@
 "use client";
 import { HeaderItems } from "@assets/item";
 import { useData } from "@context/DataProviders";
+import { useStateProvider } from "@context/StateProvider";
 import { Drawer } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { AiOutlineDown } from "react-icons/ai";
+import { BiLogOutCircle } from "react-icons/bi";
+import { CgProfile } from "react-icons/cg";
 import { FaCaretDown, FaRegUser, FaSearch } from "react-icons/fa";
 import { IoIosMenu } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
+import { MdAdminPanelSettings } from "react-icons/md";
 import { RxCross2 } from "react-icons/rx";
 
 const Header = () => {
   const [search, setSearch] = useState("");
   const [searchRs, setSearchRs] = useState([]);
-  const { Products, TradeMarkData } = useData();
+  const { Products, currentUser, setCurrentUser } = useData();
   const [openSearchMB, setOpenSearchMB] = useState(false);
   const [open, setOpen] = useState(false);
+  const { setIsLoading } = useStateProvider();
 
   const HeaderPluginItems = [
     {
@@ -28,6 +32,37 @@ const Header = () => {
       value: "chinh-sach-bao-hanh",
     },
   ];
+
+  const UserItems = [
+    {
+      label: "Tài khoản",
+      value: `tai-khoan`,
+      icon: CgProfile,
+    },
+    {
+      label: "Đăng xuất",
+      value: "dang-xuat",
+      icon: BiLogOutCircle,
+    },
+  ];
+
+  if (currentUser?.role === "admin") {
+    //push admin option in userItems[0] array
+    UserItems.unshift({
+      label: "Trang quản trị",
+      value: "admin",
+      icon: MdAdminPanelSettings,
+    });
+    //delete userItems[1] array
+    UserItems.splice(1, 1);
+  }
+  const HandleLogout = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setCurrentUser(null);
+    }, 1000);
+    setIsLoading(false);
+  };
 
   useEffect(() => {
     const sort = Products?.filter((product: any) =>
@@ -97,7 +132,65 @@ const Header = () => {
           </div>
           <div className="flex items-center gap-6 text-[25px] ">
             <IoCartOutline />
-            <FaRegUser />
+            <div>
+              {currentUser ? (
+                <div className="shadow-2xl relative group/main ">
+                  <Link href={`/tai-khoan`}>
+                    <Image
+                      src={currentUser.photoURL}
+                      alt="user"
+                      width={40}
+                      height={40}
+                      className="border rounded-full w-[40px] h-[40px] cursor-pointer"
+                    />
+                  </Link>
+                  <div className="flex flex-col top-6 absolute z-50 w-full right-20">
+                    <div className="bg-none w-full h-4"></div>
+                    <div className=" top-9 hidden group-hover/main:block duration-300">
+                      <div className=" flex flex-col bg-white w-max shadow-md border-t-2  border-gray-500 ">
+                        {UserItems.map((items: any, idx: number) => (
+                          <>
+                            {items.label === "Đăng xuất" ? (
+                              <>
+                                <div
+                                  key={idx}
+                                  onClick={() => HandleLogout()}
+                                  className="full"
+                                >
+                                  <p className="py-2 px-4 cursor-pointer  hover:bg-green-100 w-full duration-300 text-black truncate text-[15px] font-light">
+                                    {" "}
+                                    {items.label}
+                                  </p>
+                                </div>
+                              </>
+                            ) : (
+                              <>
+                                <Link
+                                  key={idx}
+                                  href={`/${items.value}`}
+                                  className="full"
+                                >
+                                  <p className="py-2 px-4  hover:bg-green-100 w-full duration-300 text-black truncate text-[15px] font-light">
+                                    {" "}
+                                    {items.label}
+                                  </p>
+                                </Link>
+                              </>
+                            )}
+                          </>
+                        ))}
+
+                        {}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <Link href={`/dang-nhap`}>
+                  <FaRegUser />
+                </Link>
+              )}
+            </div>
           </div>
         </div>
         <div className=" w-full bg-mainGreen">
