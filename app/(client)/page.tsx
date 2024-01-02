@@ -1,7 +1,9 @@
+import HomeDisplayProduct from "@components/client/Home/HomeDisplayProduct";
 import HomeSlide from "@components/client/Home/HomeSlide";
 import ShortIntro from "@components/client/Home/ShortIntro";
 import Footer from "@components/layout/client-layout/Footer";
 import Header from "@components/layout/client-layout/Header";
+import { getAllDataProps } from "@lib/get-data";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,7 +14,9 @@ export const metadata: Metadata = {
   description: "Ken EBIKE - cửa hàng xe điện uy tín tại Cần Thơ",
 };
 
-const HomePage = () => {
+const HomePage = async () => {
+  const Data = await getAllDataProps("products");
+
   return (
     <div>
       <HomeSlide />
@@ -23,6 +27,13 @@ const HomePage = () => {
         <div className="mx-10 py-5  ">
           <div className="bg-green-600 text-white text-center text-[30px] font-normal py-2">
             ✨ SẢN PHẨM BÁN CHẠY NHẤT 🔥
+          </div>
+          <div>
+            {Data.map((item: any, index: number) => (
+              <div key={index}>
+                <HomeDisplayProduct Data={item} />
+              </div>
+            ))}
           </div>
         </div>
       </div>

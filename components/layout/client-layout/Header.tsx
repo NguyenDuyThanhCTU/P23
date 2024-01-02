@@ -135,7 +135,7 @@ const Header = () => {
             <div>
               {currentUser ? (
                 <div className="shadow-2xl relative group/main ">
-                  <Link href={`/tai-khoan`}>
+                  <Link href={`/dang-nhap`}>
                     <Image
                       src={currentUser.photoURL}
                       alt="user"

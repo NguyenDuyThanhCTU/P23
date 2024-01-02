@@ -26,6 +26,7 @@ const ProductDetail = () => {
   const [ProductFetch, setProductFetch] = useState<any>();
   const [isCombo, setIsCombo] = useState(1);
   const [openContact, setOpenContact] = useState<any>(false);
+  const [colorSelected, setColorSelected] = useState<any>("");
   const { setCartItems, Sale } = useData();
   const { setOpenCart, OpenCart } = useStateProvider();
   const router = useRouter();
@@ -67,6 +68,12 @@ const ProductDetail = () => {
       ]);
       setOpenCart(true);
     }
+  };
+
+  const HandleColorSelected = (item: any) => {
+    setCartItems((prevItems: any) => [...prevItems, item]);
+
+    setColorSelected(item);
   };
 
   const items = [
@@ -116,30 +123,31 @@ const ProductDetail = () => {
               <>
                 {" "}
                 <div className="w-full bg-gray-100 mt-3">
-                  <div className="p-2 flex ">
+                  <div className="p-2 flex w-full">
                     <Image.PreviewGroup>
                       <Swiper
+                        loop={true}
                         spaceBetween={30}
                         centeredSlides={true}
-                        slidesPerView={5}
+                        slidesPerView={2}
                         slidesPerGroup={1}
                         autoplay={{
                           delay: 2500,
                           disableOnInteraction: false,
                         }}
                         modules={[Autoplay]}
-                        className="mySwiper"
+                        className="mySwiper w-full"
                       >
                         {ProductFetch?.subimage?.map(
                           (item: any, idx: number) => (
-                            <SwiperSlide>
+                            <SwiperSlide key={idx}>
                               {" "}
-                              {/* <div className="mx-4 w-[150px] h-[150px] overflow-hidden flex items-center"> */}
-                              <Image
-                                className="p-2 h-full w-full object-contain"
-                                src={item.url}
-                              />
-                              {/* </div> */}
+                              <div className="mx-4 w-[150px] h-[150px] overflow-hidden flex items-center">
+                                <Image
+                                  className="p-2 h-full w-full object-contain"
+                                  src={item.url}
+                                />
+                              </div>
                             </SwiperSlide>
                           )
                         )}
@@ -197,6 +205,52 @@ const ProductDetail = () => {
                   Tình trạng: Hết hàng
                 </div>
               )}
+            </div>
+            <div>
+              <h3 className="py-1">Màu sắc:</h3>
+              <div className="flex gap-2 flex-col ">
+                {ProductFetch?.color?.map((item: any, idx: number) => (
+                  <div key={idx} className="flex items-center gap-2">
+                    <div
+                      onClick={() => HandleColorSelected(item)}
+                      className={`${
+                        item === colorSelected
+                          ? "bg-mainGreen"
+                          : item === "Cam"
+                          ? "bg-orange-500"
+                          : item === "Đỏ"
+                          ? "bg-red-500"
+                          : item === "Xanh"
+                          ? "bg-blue-500"
+                          : item === "Xám"
+                          ? "bg-gray-500"
+                          : item === "Vàng"
+                          ? "bg-yellow-500"
+                          : item === "Đen"
+                          ? "bg-black"
+                          : item === "Trắng"
+                          ? "bg-white"
+                          : item === "Nâu"
+                          ? "bg-brown-500"
+                          : item === "Tím"
+                          ? "bg-purple-500"
+                          : item === "Hồng"
+                          ? "bg-pink-500"
+                          : item === "Xanh Đen"
+                          ? "bg-blue-900"
+                          : item === "Xám bạc"
+                          ? "bg-gray-400"
+                          : item === "Xanh lam"
+                          ? "bg-blue-300"
+                          : null
+                      } w-[30px] h-[30px] rounded-full border border-black`}
+                    ></div>
+                    <div>
+                      <p>{item}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
             <div>
               <h3 className="py-1">Đặt hàng:</h3>
