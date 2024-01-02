@@ -23,6 +23,7 @@ const config: Config = {
         adminOrange: "#ffb301",
 
         //custom color
+        mainGreen: "#38761D",
       },
     },
     keyframes: {

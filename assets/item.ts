@@ -87,11 +87,6 @@ export const IconMapping: IconMappingType = {
   FaRegNewspaper: FaRegNewspaper,
 };
 
-import paymentAnimation from "./animation/payment.json";
-import policyAnimation from "./animation/policy.json";
-import rulesAnimation from "./animation/rules.json";
-import securityAnimation from "./animation/security.json";
-
 export const ProductSidebarAdmin = [
   {
     name: "Giới thiệu",
@@ -264,38 +259,28 @@ export const SocialMediaCustom = [
 
 export const HeaderItems = [
   {
-    label: "Trang Chủ",
-    value: "",
-  },
-
-  {
-    label: "Quảng cáo biển hiệu",
-    value: "chuyen-muc/quang-cao-bien-hieu",
-  },
-  {
-    label: "Nội Thất",
-    value: "chuyen-muc/thiet-ke-noi-that",
-  },
-  {
-    label: "Nhà Phố",
-    value: "chuyen-muc/thiet-ke-nha-pho",
-  },
-  {
-    label: "Giới thiệu",
+    label: "Giới Thiệu",
     value: "gioi-thieu",
   },
-
   {
-    label: "Dịch Vụ",
-    value: "chuyen-muc/dich-vu-thiet-ke-thi-cong",
+    label: "Xe Đạp Trợ Lực Điện",
+    value: "xe-dap-tro-luc-dien",
   },
   {
-    label: "Tin tức",
-    value: "chuyen-muc/tin-tuc-xay-dung",
+    label: "Xe Đạp Điện",
+    value: "xe-dap-dien",
   },
   {
-    label: "Liên hệ",
+    label: "Tin Tức",
+    value: "tin-tuc",
+  },
+  {
+    label: "Liên Hệ",
     value: "lien-he",
+  },
+  {
+    label: "Tiện Ích",
+    value: "dang-ky-lai-thu",
   },
 ];
 
@@ -386,22 +371,18 @@ export const TypePostItems = [
   {
     label: "Chính sách bảo mật",
     value: "chinh-sach-bao-mat",
-    animation: paymentAnimation,
   },
   {
     label: "Chính sách thanh toán",
     value: "chinh-sach-thanh-toan",
-    animation: rulesAnimation,
   },
   {
     label: "Cam kết chất lượng dịch vụ",
     value: "cam-ket-chat-luong-dich-vu",
-    animation: policyAnimation,
   },
   {
     label: "Chính sách bảo hành",
     value: "chinh-sach-bao-hanh",
-    animation: securityAnimation,
   },
 ];
 

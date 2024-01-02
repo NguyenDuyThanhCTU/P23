@@ -13,7 +13,6 @@ export const metadata: Metadata = {
 const HomePage = () => {
   return (
     <div>
-      <Header />
       <div className="py-10 font-LexendDeca">
         <div className=" relative h-[500px] ">
           <Image
@@ -32,7 +31,6 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
