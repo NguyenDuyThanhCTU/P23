@@ -1,7 +1,6 @@
 "use client";
 import { useData } from "@context/DataProviders";
 import React, { useEffect } from "react";
-import ProductCard from "../Products/ProductCard";
 
 const UserFavorite = () => {
   const { Products, currentUser } = useData();
@@ -12,11 +11,11 @@ const UserFavorite = () => {
   console.log(favoriteProducts);
   return (
     <div className="grid gap-5 p:grid-cols-2 d:grid-cols-4">
-      {favoriteProducts.map((item: any, idx: number) => (
+      {/* {favoriteProducts.map((item: any, idx: number) => (
         <div key={idx}>
           <ProductCard Data={item} />
         </div>
-      ))}
+      ))} */}
     </div>
   );
 };

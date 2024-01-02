@@ -9,15 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^40.2.0",
+    "@ckeditor/ckeditor5-react": "^6.2.0",
     "antd": "^5.12.6",
+    "diacritic": "^0.0.2",
     "firebase": "^10.7.1",
     "lottie-react": "^2.4.0",
     "moment": "^2.30.1",
     "next": "13.5.4",
     "react": "^18",
+    "react-countup": "^6.5.0",
     "react-dom": "^18",
+    "react-facebook": "^9.0.12",
     "react-icons": "^4.12.0",
     "react-tsparticles": "^2.12.2",
+    "swiper": "^11.0.5",
     "tsparticles": "^3.0.3"
   },
   "devDependencies": {

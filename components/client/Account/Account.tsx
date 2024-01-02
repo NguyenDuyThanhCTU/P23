@@ -59,7 +59,7 @@ const Account = () => {
                 <div
                   key={idx}
                   onClick={() => setSelected(idx)}
-                  className="cursor-pointer  hover:scale-105 duration-300 font-light hover:text-mainyellow"
+                  className="cursor-pointer  hover:scale-105 duration-300 font-light hover:text-mainGreen"
                 >
                   {item.label}
                 </div>
@@ -96,7 +96,7 @@ const Account = () => {
             <div className="flex">
               <Link
                 href={`/dang-nhap`}
-                className="py-2 px-10 rounded-full cursor-pointer text-[24px] font-normal text-white bg-mainyellow border-mainyellow duration-300 hover:bg-orange-500 hover:border-orange-500"
+                className="py-2 px-10 rounded-full cursor-pointer text-[24px] font-normal text-white bg-mainGreen border-mainGreen duration-300 hover:bg-orange-500 hover:border-orange-500"
               >
                 {" "}
                 Đến trang đăng nhập

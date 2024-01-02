@@ -15,7 +15,11 @@ import {
   uploadImage,
 } from "@components/items/server-items/Handle";
 import { addDocument } from "@config/Services/Firebase/FireStoreDB";
-import { ProductTypeItems, TypeProductItems } from "@assets/item";
+import {
+  ProductFunctionType,
+  ProductPriceItems,
+  TypeProductItems,
+} from "@assets/item";
 import TextEditor from "@components/admin/Item/CKEditor/TextEditor";
 
 const AddProduct = ({}) => {
@@ -31,10 +35,14 @@ const AddProduct = ({}) => {
   const [typeUrl, setTypeUrl] = useState<string | undefined>();
   const [parentUrl, setParentUrl] = useState<string | undefined>();
   const [ListSubImage, setListSubImage] = useState<any>([]);
-  const [topic, setTopic] = useState<any>();
+
+  const [ProductFunction, setProductFunction] = useState<any>();
+  const [ProductFunctionUrl, setProductFunctionUrl] = useState<any>();
+  const [ProductPrice, setProductPrice] = useState<any>();
+  const [ProductPriceUrl, setProductPriceUrl] = useState<any>();
 
   const { setDropDown, setIsRefetch } = useStateProvider();
-  const { productTypes, Products } = useData();
+  const { productTypes } = useData();
   const [open, setOpen] = useState(false);
   const [openDescription, setOpenDescription] = useState(false);
   const { Option } = Select;
@@ -79,17 +87,12 @@ const AddProduct = ({}) => {
   };
 
   const HandleSubmit = () => {
-    //get lastest id of product in database
-
-    const lastestId = Products[Products.length - 1];
-    console.log("lastestId");
     if (!Title) {
       notification["error"]({
         message: "Lỗi !!!",
         description: `Vui lòng bổ sung đầy đủ thông tin !`,
       });
     } else {
-      const pId = lastestId.pId + 1;
       const data: any = {
         title: Title,
         content: Content,
@@ -101,7 +104,6 @@ const AddProduct = ({}) => {
         parent: isParent,
         parentUrl: parentUrl,
         state: "Còn hàng",
-        pId: pId,
         url: titleUrl,
         sale: {
           discount: 0,
@@ -109,7 +111,10 @@ const AddProduct = ({}) => {
         },
         access: Math.floor(Math.random() * (10000 - 100 + 1)) + 100,
         subimage: ListSubImage,
-        topic: topic,
+        function: ProductFunction,
+        functionUrl: ProductFunctionUrl,
+        priceSegmentUrl: ProductPriceUrl,
+        priceSegment: ProductPrice,
       };
 
       for (let key in data) {
@@ -163,6 +168,23 @@ const AddProduct = ({}) => {
     setImageUrl(newImageUrl);
   };
 
+  const handleOption = (values: any, type: string) => {
+    if (type === "function") {
+      const sort = ProductFunctionType.filter(
+        (items: any) => items.value === values
+      );
+      setProductFunction(sort[0].label);
+      setProductFunctionUrl(sort[0].value);
+    } else {
+      const sort = ProductPriceItems.filter(
+        (items: any) => items.value === values
+      );
+
+      setProductPrice(sort[0].label);
+      setProductPriceUrl(sort[0].value);
+    }
+  };
+
   return (
     <div
       className={`bg-[rgba(0,0,0,0.3)] w-full 
@@ -210,17 +232,8 @@ const AddProduct = ({}) => {
               </div>
             </div>
             <div className="  flex flex-col gap-3">
-              <Input
-                text="Tên sản phẩm"
-                Value={Title}
-                setValue={(e: any) => setTitle(e.target.value)}
-              />
-              <Input
-                text="Giá sản phẩm"
-                Value={Price}
-                setValue={(e: any) => setPrice(e.target.value)}
-                input={true}
-              />
+              <Input text="Tên sản phẩm" Value={Title} setValue={setTitle} />
+              <Input text="Giá sản phẩm" Value={Price} setValue={setPrice} />
 
               <div className="">
                 <label>Thông tin sản phẩm</label>
@@ -256,9 +269,7 @@ const AddProduct = ({}) => {
             <div className="  flex flex-col gap-3">
               <div className="flex flex-col gap-2 w-full">
                 <div className="flex flex-col gap-2">
-                  <label className="text-md font-medium ">
-                    Danh mục sản phẩm
-                  </label>
+                  <label className="text-md font-medium ">Mục bài viết:</label>
                   <select
                     className="outline-none lg:w-650 border-2 border-gray-200 text-md capitalize lg:p-4 p-2 rounded cursor-pointer"
                     onChange={(e) => setIsParent(e.target.value)}
@@ -277,9 +288,7 @@ const AddProduct = ({}) => {
                   </select>
                 </div>
                 <div className="flex flex-col gap-2 w-[190px]">
-                  <label className="text-md font-medium ">
-                    Danh mục cấp 1:
-                  </label>
+                  <label className="text-md font-medium ">Loại bài viết</label>
                   <Select
                     style={{ width: "100%" }}
                     placeholder="Chọn loại bài viết"
@@ -301,19 +310,33 @@ const AddProduct = ({}) => {
                 <div className="flex flex-col gap-2 w-full">
                   <div className="flex flex-col gap-2">
                     <label className="text-md font-medium ">
-                      Phân loại sản phẩm
+                      Chức năng sản phẩm
                     </label>
                     <Select
                       style={{ width: "100%" }}
                       placeholder="Chọn loại bài viết"
-                      onChange={setTopic}
+                      onChange={(e) => handleOption(e, "function")}
                       optionLabelProp="label"
                     >
-                      {ProductTypeItems.slice(
-                        0,
-                        ProductTypeItems.length - 1
-                      ).map((item: any, idx: any) => (
-                        <Option value={item.label} label={item.label} key={idx}>
+                      {ProductFunctionType.map((item: any, idx: any) => (
+                        <Option value={item.value} label={item.label} key={idx}>
+                          <Space>{item.label}</Space>
+                        </Option>
+                      ))}
+                    </Select>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <label className="text-md font-medium ">
+                      Phân khúc giá sản phẩm
+                    </label>
+                    <Select
+                      style={{ width: "100%" }}
+                      placeholder="Chọn loại bài viết"
+                      onChange={(e) => handleOption(e, "price")}
+                      optionLabelProp="label"
+                    >
+                      {ProductPriceItems.map((item: any, idx: any) => (
+                        <Option value={item.value} label={item.label} key={idx}>
                           <Space>{item.label}</Space>
                         </Option>
                       ))}

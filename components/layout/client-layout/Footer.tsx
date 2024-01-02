@@ -91,9 +91,9 @@ const Footer = () => {
             <h2 className="text-[18px] font-normal ">Fanpage</h2>
             <div className="h-52 overflow-hidden mt-4">
               <iframe
-                src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FCTUDHCT&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+                src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FKEN.EBIKE%2Fabout_contact_and_basic_info&tabs=timeline&width=340&height=600&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
                 width="600"
-                height="500"
+                height="600"
                 allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
               ></iframe>
             </div>

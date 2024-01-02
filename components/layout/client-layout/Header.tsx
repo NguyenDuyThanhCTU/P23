@@ -186,7 +186,7 @@ const Header = () => {
                   </div>
                 </div>
               ) : (
-                <Link href={`/dang-nhap`}>
+                <Link href={`/tai-khoan`}>
                   <FaRegUser />
                 </Link>
               )}

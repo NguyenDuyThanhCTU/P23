@@ -11,11 +11,11 @@ import React, { useEffect } from "react";
 const AdminPage = () => {
   const { verify } = useAuth();
   const router = useRouter();
-  useEffect(() => {
-    if (!verify) {
-      router.push("/dang-nhap");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!verify) {
+  //     router.push("/dang-nhap");
+  //   }
+  // }, []);
   return (
     <div>
       <div className="grid grid-flow-col font-LexendDeca relative ">
