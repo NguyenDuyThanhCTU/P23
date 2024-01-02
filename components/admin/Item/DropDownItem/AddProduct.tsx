@@ -15,11 +15,7 @@ import {
   uploadImage,
 } from "@components/items/server-items/Handle";
 import { addDocument } from "@config/Services/Firebase/FireStoreDB";
-import {
-  ProductFunctionType,
-  ProductPriceItems,
-  TypeProductItems,
-} from "@assets/item";
+import { TypeProductItems } from "@assets/item";
 import TextEditor from "@components/admin/Item/CKEditor/TextEditor";
 
 const AddProduct = ({}) => {
@@ -36,17 +32,21 @@ const AddProduct = ({}) => {
   const [parentUrl, setParentUrl] = useState<string | undefined>();
   const [ListSubImage, setListSubImage] = useState<any>([]);
 
-  const [ProductFunction, setProductFunction] = useState<any>();
-  const [ProductFunctionUrl, setProductFunctionUrl] = useState<any>();
-  const [ProductPrice, setProductPrice] = useState<any>();
-  const [ProductPriceUrl, setProductPriceUrl] = useState<any>();
-
   const { setDropDown, setIsRefetch } = useStateProvider();
   const { productTypes } = useData();
   const [open, setOpen] = useState(false);
   const [openDescription, setOpenDescription] = useState(false);
   const { Option } = Select;
+  const [selectedValues, setSelectedValues] = useState<any>([]);
 
+  const handleCheckboxChange = (e: any) => {
+    const { value, checked } = e.target;
+    if (checked) {
+      setSelectedValues([...selectedValues, value]);
+    } else {
+      setSelectedValues(selectedValues.filter((item: any) => item !== value));
+    }
+  };
   const initial1 =
     "<p>Chất liệu: </p> <br/> <p>Màu sắc: </p> <br/> <p>Size: </p> <br/> <p>Chiều dài: </p> <br/> <p>Chiều rộng: </p> <br/> <p>Chiều cao: </p> <br/> <p>Trọng lượng: </p> <br/> <p>Thương hiệu: </p> <br/> <p>Xuất xứ: </p> <br/> <p>Chất liệu";
   const initDescribe = "<p> mô tả sản phẩm </p>";
@@ -109,12 +109,9 @@ const AddProduct = ({}) => {
           discount: 0,
           newPrice: "0",
         },
+        color: selectedValues,
         access: Math.floor(Math.random() * (10000 - 100 + 1)) + 100,
         subimage: ListSubImage,
-        function: ProductFunction,
-        functionUrl: ProductFunctionUrl,
-        priceSegmentUrl: ProductPriceUrl,
-        priceSegment: ProductPrice,
       };
 
       for (let key in data) {
@@ -122,6 +119,7 @@ const AddProduct = ({}) => {
           delete data[key];
         }
       }
+      console.log(data);
       addDocument("products", data).then(() => {
         notification["success"]({
           message: "Tải lên thành công!",
@@ -166,23 +164,6 @@ const AddProduct = ({}) => {
       (item: any) => item.uid !== file.uid
     );
     setImageUrl(newImageUrl);
-  };
-
-  const handleOption = (values: any, type: string) => {
-    if (type === "function") {
-      const sort = ProductFunctionType.filter(
-        (items: any) => items.value === values
-      );
-      setProductFunction(sort[0].label);
-      setProductFunctionUrl(sort[0].value);
-    } else {
-      const sort = ProductPriceItems.filter(
-        (items: any) => items.value === values
-      );
-
-      setProductPrice(sort[0].label);
-      setProductPriceUrl(sort[0].value);
-    }
   };
 
   return (
@@ -232,8 +213,16 @@ const AddProduct = ({}) => {
               </div>
             </div>
             <div className="  flex flex-col gap-3">
-              <Input text="Tên sản phẩm" Value={Title} setValue={setTitle} />
-              <Input text="Giá sản phẩm" Value={Price} setValue={setPrice} />
+              <Input
+                text="Tên sản phẩm"
+                Value={Title}
+                setValue={(e: any) => setTitle(e.target.value)}
+              />
+              <Input
+                text="Giá sản phẩm"
+                Value={Price}
+                setValue={(e: any) => setPrice(e.target.value)}
+              />
 
               <div className="">
                 <label>Thông tin sản phẩm</label>
@@ -304,43 +293,32 @@ const AddProduct = ({}) => {
                       ))}
                   </Select>
                 </div>
-              </div>
-
-              <div className="  flex flex-col gap-3">
-                <div className="flex flex-col gap-2 w-full">
-                  <div className="flex flex-col gap-2">
-                    <label className="text-md font-medium ">
-                      Chức năng sản phẩm
-                    </label>
-                    <Select
-                      style={{ width: "100%" }}
-                      placeholder="Chọn loại bài viết"
-                      onChange={(e) => handleOption(e, "function")}
-                      optionLabelProp="label"
-                    >
-                      {ProductFunctionType.map((item: any, idx: any) => (
-                        <Option value={item.value} label={item.label} key={idx}>
-                          <Space>{item.label}</Space>
-                        </Option>
-                      ))}
-                    </Select>
-                  </div>
-                  <div className="flex flex-col gap-2">
-                    <label className="text-md font-medium ">
-                      Phân khúc giá sản phẩm
-                    </label>
-                    <Select
-                      style={{ width: "100%" }}
-                      placeholder="Chọn loại bài viết"
-                      onChange={(e) => handleOption(e, "price")}
-                      optionLabelProp="label"
-                    >
-                      {ProductPriceItems.map((item: any, idx: any) => (
-                        <Option value={item.value} label={item.label} key={idx}>
-                          <Space>{item.label}</Space>
-                        </Option>
-                      ))}
-                    </Select>
+                <div className="border">
+                  <div className="flex flex-col gap-2 p-3">
+                    <label className="font-semibold ">Màu xe</label>
+                    <div>
+                      <div>
+                        {[
+                          "Xanh lam",
+                          "Xám bạc",
+                          "Cam",
+                          "Xanh Đen",
+                          "Đen",
+                          "Nâu",
+                        ].map((item, idx) => (
+                          <div key={idx} className="flex gap-2 font-light">
+                            <input
+                              type="checkbox"
+                              id={`checkbox_${idx}`}
+                              value={item}
+                              checked={selectedValues.includes(item)}
+                              onChange={handleCheckboxChange}
+                            />
+                            <label htmlFor={`checkbox_${idx}`}>{item}</label>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

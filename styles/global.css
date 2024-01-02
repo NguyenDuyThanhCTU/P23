@@ -73,6 +73,26 @@
   }
 }
 
+
+
+.cols-4 {
+  grid-template-columns: 15% 35% 30% 20%;
+}
+
+.cols-5 {
+  grid-template-columns: 10% 30% 20% 10% 30%;
+}
+.cols-10 {
+  grid-template-columns: 5% 10% 15% 15% 10% 10% 15% 10% 5% 5%;
+}
+
+.cols-3 {
+  grid-template-columns: 10% 70% 20%;
+}
+.cols-7 {
+  grid-template-columns: 5% 10% 10% 10% 10% 15% 40%;
+}
+
 /*<---------------------------------------------------------- Truncate ----------------------------------------------------------> */
 .truncate1 {
   display: -webkit-box;

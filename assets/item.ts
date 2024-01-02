@@ -315,32 +315,12 @@ export const ToolsTipsSocialMediaItems = [
 
 export const TypeProductItems = [
   {
-    label: "Wifi Camera",
-    value: "wifi-camera",
+    label: "Xe đạp điện",
+    value: "xe-dap-dien",
   },
   {
-    label: "Dual lens Camera",
-    value: "dual-lens-camera",
-  },
-  {
-    label: "4G Camera",
-    value: "4g-camera",
-  },
-  {
-    label: "Battery Camera",
-    value: "battery-camera",
-  },
-  {
-    label: "Camera Trọn bộ",
-    value: "camera-tron-bo",
-  },
-  {
-    label: "Phụ Kiện Camera",
-    value: "phu-kien-camera",
-  },
-  {
-    label: "Thiết Bị Thông Minh",
-    value: "thiet-bi-thong-minh",
+    label: "Xe đạp trợ lực điện",
+    value: "xe-dap-tro-luc-dien",
   },
 ];
 

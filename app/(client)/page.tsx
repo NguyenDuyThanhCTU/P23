@@ -1,3 +1,5 @@
+import HomeSlide from "@components/client/Home/HomeSlide";
+import ShortIntro from "@components/client/Home/ShortIntro";
 import Footer from "@components/layout/client-layout/Footer";
 import Header from "@components/layout/client-layout/Header";
 import { Metadata } from "next";
@@ -13,21 +15,14 @@ export const metadata: Metadata = {
 const HomePage = () => {
   return (
     <div>
-      <div className="py-10 font-LexendDeca">
-        <div className=" relative h-[500px] ">
-          <Image
-            src="https://firebasestorage.googleapis.com/v0/b/adminads-11c80.appspot.com/o/config%2FConstruction.png?alt=media&token=45dc073f-a7fb-4589-bd1d-ca1580eda90f"
-            alt="404 Not Found"
-            fill
-            sizes="(min-width: 808px) 30vw , 50vw"
-            style={{
-              objectFit: "contain", // cover, contain, none
-            }}
-          />
-        </div>
-        <div>
-          <div className="text-center p:text-[14px] d:text-[16px]">
-            <p>We're sorry the page you requested under maintenance!</p>
+      <HomeSlide />
+      <div className="w-[1100px] mx-auto">
+        <ShortIntro />
+      </div>
+      <div className="bg-green-200 mt-2">
+        <div className="mx-10 py-5  ">
+          <div className="bg-green-600 text-white text-center text-[30px] font-normal py-2">
+            ✨ SẢN PHẨM BÁN CHẠY NHẤT 🔥
           </div>
         </div>
       </div>
